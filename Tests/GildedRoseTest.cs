@@ -32,7 +32,7 @@ namespace csharp
         [Test]
         public void TestCustomProduct()
         {
-            AssertCustomProductQuality(8, 0, 10);
+            AssertCustomProductQuality(1, -1, 3);
         }
 
         private void AssertBackstagePassQuality(int expected, int sellIn, int quality)
