@@ -14,59 +14,59 @@ namespace csharp
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (!IsAgedBrie(Items[i]) && !IsBackstagePass(Items[i]))
                 {
                     if (Items[i].Quality > 0)
                     {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                        if (!IsSulfuras(Items[i]))
                         {
-                            Items[i].Quality = Items[i].Quality - 1;
+                            DecreaseQuality(Items[i]);
                         }
                     }
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    if (IsQualityLessThan50(Items[i]))
                     {
-                        Items[i].Quality = Items[i].Quality + 1;
+                        IncreaseQuality(Items[i]);
 
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (IsBackstagePass(Items[i]))
                         {
                             if (Items[i].SellIn < 11)
                             {
-                                if (Items[i].Quality < 50)
+                                if (IsQualityLessThan50(Items[i]))
                                 {
-                                    Items[i].Quality = Items[i].Quality + 1;
+                                    IncreaseQuality(Items[i]);
                                 }
                             }
 
                             if (Items[i].SellIn < 6)
                             {
-                                if (Items[i].Quality < 50)
+                                if (IsQualityLessThan50(Items[i]))
                                 {
-                                    Items[i].Quality = Items[i].Quality + 1;
+                                    IncreaseQuality(Items[i]);
                                 }
                             }
                         }
                     }
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                if (!IsSulfuras(Items[i]))
                 {
                     Items[i].SellIn = Items[i].SellIn - 1;
                 }
 
                 if (Items[i].SellIn < 0)
                 {
-                    if (Items[i].Name != "Aged Brie")
+                    if (!IsAgedBrie(Items[i]))
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (!IsBackstagePass(Items[i]))
                         {
                             if (Items[i].Quality > 0)
                             {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                                if (!IsSulfuras(Items[i]))
                                 {
-                                    Items[i].Quality = Items[i].Quality - 1;
+                                    DecreaseQuality(Items[i]);
                                 }
                             }
                         }
@@ -77,13 +77,43 @@ namespace csharp
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
+                        if (IsQualityLessThan50(Items[i]))
                         {
-                            Items[i].Quality = Items[i].Quality + 1;
+                            IncreaseQuality(Items[i]);
                         }
                     }
                 }
             }
+        }
+
+        private bool IsSulfuras(Item item)
+        {
+            return item.Name == "Sulfuras, Hand of Ragnaros";
+        }
+
+        private bool IsBackstagePass(Item item)
+        {
+            return item.Name == "Backstage passes to a TAFKAL80ETC concert";
+        }
+
+        private bool IsAgedBrie(Item item)
+        {
+            return item.Name == "Aged Brie";
+        }
+
+        private bool IsQualityLessThan50(Item item)
+        {
+            return item.Quality < 50;
+        }
+
+        private void IncreaseQuality(Item item)
+        {
+            item.Quality = item.Quality + 1;
+        }
+
+        private void DecreaseQuality(Item item)
+        {
+            item.Quality = item.Quality - 1;
         }
     }
 }
