@@ -39,31 +39,36 @@ namespace csharp
                     HandleBackstagePass(item);
                 }
                 
-
-                if (item.SellIn < 0)
+                
+                if (IsAgedBrie(item))
                 {
-                    if (IsAgedBrie(item))
+                    if (item.SellIn < 0)
                     {
                         if (IsQualityLessThan50(item))
                         {
                             IncreaseQuality(item);
                         }
                     }
-                    else if (IsBackstagePass(item))
+                }
+                else if (IsBackstagePass(item))
+                {
+                    if (item.SellIn < 0)
                     {
                         item.Quality = item.Quality - item.Quality;
                     }
-                    else if(IsSulfuras(item))
-                    {
-                    }
-                    else if (IsGeneric(item))
+                }
+                else if(IsSulfuras(item))
+                {
+                }
+                else if (IsGeneric(item))
+                {
+                    if (item.SellIn < 0)
                     {
                         if (item.Quality > 0)
                         {
                             DecreaseQuality(item);
                         }
                     }
-                    
                 }
             }
         }
