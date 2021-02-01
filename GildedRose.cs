@@ -24,6 +24,7 @@ namespace csharp
                     {
                         DecreaseQuality(item);
                     }
+                    item.SellIn = item.SellIn - 1;
                 }
                 else if(IsAgedBrie(item))
                 {
@@ -31,16 +32,13 @@ namespace csharp
                     {
                         IncreaseQuality(item);
                     }
+                    item.SellIn = item.SellIn - 1;
                 }
                 else if(IsBackstagePass(item))
                 {
                     HandleBackstagePass(item);
                 }
-
-                if (!IsSulfuras(item))
-                {
-                    item.SellIn = item.SellIn - 1;
-                }
+                
 
                 if (item.SellIn < 0)
                 {
@@ -94,6 +92,8 @@ namespace csharp
                     }
                 }
             }
+
+            item.SellIn = item.SellIn - 1;
         }
 
         private bool IsGeneric(Item item)
