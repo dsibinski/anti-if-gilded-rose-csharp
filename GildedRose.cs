@@ -42,9 +42,20 @@ namespace csharp
 
                 if (item.SellIn < 0)
                 {
-                    if (!IsAgedBrie(item))
+                    if (IsAgedBrie(item))
                     {
-                        if (!IsBackstagePass(item))
+                        if (IsQualityLessThan50(item))
+                        {
+                            IncreaseQuality(item);
+                        }
+                    }
+                    else
+                    {
+                        if (IsBackstagePass(item))
+                        {
+                            item.Quality = item.Quality - item.Quality;
+                        }
+                        else
                         {
                             if (item.Quality > 0)
                             {
@@ -53,17 +64,6 @@ namespace csharp
                                     DecreaseQuality(item);
                                 }
                             }
-                        }
-                        else
-                        {
-                            item.Quality = item.Quality - item.Quality;
-                        }
-                    }
-                    else
-                    {
-                        if (IsQualityLessThan50(item))
-                        {
-                            IncreaseQuality(item);
                         }
                     }
                 }
