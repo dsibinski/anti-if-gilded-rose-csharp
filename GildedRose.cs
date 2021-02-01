@@ -49,23 +49,21 @@ namespace csharp
                             IncreaseQuality(item);
                         }
                     }
-                    else
+                    else if (IsBackstagePass(item))
                     {
-                        if (IsBackstagePass(item))
+                        item.Quality = item.Quality - item.Quality;
+                    }
+                    else if(IsSulfuras(item))
+                    {
+                    }
+                    else if (IsGeneric(item))
+                    {
+                        if (item.Quality > 0)
                         {
-                            item.Quality = item.Quality - item.Quality;
-                        }
-                        else
-                        {
-                            if (item.Quality > 0)
-                            {
-                                if (!IsSulfuras(item))
-                                {
-                                    DecreaseQuality(item);
-                                }
-                            }
+                            DecreaseQuality(item);
                         }
                     }
+                    
                 }
             }
         }
