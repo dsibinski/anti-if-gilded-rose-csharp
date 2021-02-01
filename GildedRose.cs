@@ -25,17 +25,16 @@ namespace csharp
                         DecreaseQuality(item);
                     }
                 }
-                else
+                else if(IsAgedBrie(item))
                 {
                     if (IsQualityLessThan50(item))
                     {
                         IncreaseQuality(item);
-
-                        if (IsBackstagePass(item))
-                        {
-                            HandleBackstagePass(item);
-                        }
                     }
+                }
+                else if(IsBackstagePass(item))
+                {
+                    HandleBackstagePass(item);
                 }
 
                 if (!IsSulfuras(item))
@@ -75,19 +74,24 @@ namespace csharp
 
         private void HandleBackstagePass(Item item)
         {
-            if (item.SellIn < 11)
+            if (IsQualityLessThan50(item))
             {
-                if (IsQualityLessThan50(item))
-                {
-                    IncreaseQuality(item);
-                }
-            }
+                IncreaseQuality(item);
 
-            if (item.SellIn < 6)
-            {
-                if (IsQualityLessThan50(item))
+                if (item.SellIn < 11)
                 {
-                    IncreaseQuality(item);
+                    if (IsQualityLessThan50(item))
+                    {
+                        IncreaseQuality(item);
+                    }
+                }
+
+                if (item.SellIn < 6)
+                {
+                    if (IsQualityLessThan50(item))
+                    {
+                        IncreaseQuality(item);
+                    }
                 }
             }
         }
