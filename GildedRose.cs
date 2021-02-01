@@ -14,7 +14,17 @@ namespace csharp
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (!IsAgedBrie(Items[i]) && !IsBackstagePass(Items[i]))
+                if(IsSulfuras(Items[i]))
+                {
+                    if (Items[i].Quality > 0)
+                    {
+                        if (!IsSulfuras(Items[i]))
+                        {
+                            DecreaseQuality(Items[i]);
+                        }
+                    }
+                } 
+                else if (IsGeneric(Items[i]))
                 {
                     if (Items[i].Quality > 0)
                     {
@@ -84,6 +94,11 @@ namespace csharp
                     }
                 }
             }
+        }
+
+        private bool IsGeneric(Item item)
+        {
+            return !(IsSulfuras(item) || IsBackstagePass(item) || IsAgedBrie(item));
         }
 
         private bool IsSulfuras(Item item)
