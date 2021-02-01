@@ -20,55 +20,15 @@ namespace csharp
                 }
                 else if (IsGeneric(item))
                 {
-                    if (item.Quality > 0)
-                    {
-                        DecreaseQuality(item);
-                    }
-                    item.SellIn = item.SellIn - 1;
+                    HandleGeneric(item);
                 }
                 else if(IsAgedBrie(item))
                 {
-                    if (IsQualityLessThan50(item))
-                    {
-                        IncreaseQuality(item);
-                    }
-                    item.SellIn = item.SellIn - 1;
+                    HandleAgedBrie(item);
                 }
                 else if(IsBackstagePass(item))
                 {
                     HandleBackstagePass(item);
-                }
-                
-                
-                if (IsAgedBrie(item))
-                {
-                    if (item.SellIn < 0)
-                    {
-                        if (IsQualityLessThan50(item))
-                        {
-                            IncreaseQuality(item);
-                        }
-                    }
-                }
-                else if (IsBackstagePass(item))
-                {
-                    if (item.SellIn < 0)
-                    {
-                        item.Quality = item.Quality - item.Quality;
-                    }
-                }
-                else if(IsSulfuras(item))
-                {
-                }
-                else if (IsGeneric(item))
-                {
-                    if (item.SellIn < 0)
-                    {
-                        if (item.Quality > 0)
-                        {
-                            DecreaseQuality(item);
-                        }
-                    }
                 }
             }
         }
@@ -97,6 +57,44 @@ namespace csharp
             }
 
             item.SellIn = item.SellIn - 1;
+            if (item.SellIn < 0)
+            {
+                item.Quality = item.Quality - item.Quality;
+            }
+        }
+
+        private void HandleAgedBrie(Item item)
+        {
+            if (IsQualityLessThan50(item))
+            {
+                IncreaseQuality(item);
+            }
+
+            item.SellIn = item.SellIn - 1;
+            if (item.SellIn < 0)
+            {
+                if (IsQualityLessThan50(item))
+                {
+                    IncreaseQuality(item);
+                }
+            }
+        }
+
+        private void HandleGeneric(Item item)
+        {
+            if (item.Quality > 0)
+            {
+                DecreaseQuality(item);
+            }
+
+            item.SellIn = item.SellIn - 1;
+            if (item.SellIn < 0)
+            {
+                if (item.Quality > 0)
+                {
+                    DecreaseQuality(item);
+                }
+            }
         }
 
         private bool IsGeneric(Item item)
