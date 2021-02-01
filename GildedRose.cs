@@ -13,18 +13,8 @@ namespace csharp
         public void UpdateQuality()
         {
             for (var i = 0; i < Items.Count; i++)
-            {
-                if(IsSulfuras(Items[i]))
-                {
-                    if (Items[i].Quality > 0)
-                    {
-                        if (!IsSulfuras(Items[i]))
-                        {
-                            DecreaseQuality(Items[i]);
-                        }
-                    }
-                } 
-                else if (IsGeneric(Items[i]))
+            { 
+                if (IsGeneric(Items[i]))
                 {
                     if (Items[i].Quality > 0)
                     {
