@@ -12,76 +12,82 @@ namespace csharp
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
-            { 
-                if (IsGeneric(Items[i]))
+            foreach (var item in Items)
+            {
+                if (IsSulfuras(item))
                 {
-                    if (Items[i].Quality > 0)
+                    
+                }
+                else if (IsGeneric(item))
+                {
+                    if (item.Quality > 0)
                     {
-                        if (!IsSulfuras(Items[i]))
-                        {
-                            DecreaseQuality(Items[i]);
-                        }
+                        DecreaseQuality(item);
                     }
                 }
                 else
                 {
-                    if (IsQualityLessThan50(Items[i]))
+                    if (IsQualityLessThan50(item))
                     {
-                        IncreaseQuality(Items[i]);
+                        IncreaseQuality(item);
 
-                        if (IsBackstagePass(Items[i]))
+                        if (IsBackstagePass(item))
                         {
-                            if (Items[i].SellIn < 11)
-                            {
-                                if (IsQualityLessThan50(Items[i]))
-                                {
-                                    IncreaseQuality(Items[i]);
-                                }
-                            }
-
-                            if (Items[i].SellIn < 6)
-                            {
-                                if (IsQualityLessThan50(Items[i]))
-                                {
-                                    IncreaseQuality(Items[i]);
-                                }
-                            }
+                            HandleBackstagePass(item);
                         }
                     }
                 }
 
-                if (!IsSulfuras(Items[i]))
+                if (!IsSulfuras(item))
                 {
-                    Items[i].SellIn = Items[i].SellIn - 1;
+                    item.SellIn = item.SellIn - 1;
                 }
 
-                if (Items[i].SellIn < 0)
+                if (item.SellIn < 0)
                 {
-                    if (!IsAgedBrie(Items[i]))
+                    if (!IsAgedBrie(item))
                     {
-                        if (!IsBackstagePass(Items[i]))
+                        if (!IsBackstagePass(item))
                         {
-                            if (Items[i].Quality > 0)
+                            if (item.Quality > 0)
                             {
-                                if (!IsSulfuras(Items[i]))
+                                if (!IsSulfuras(item))
                                 {
-                                    DecreaseQuality(Items[i]);
+                                    DecreaseQuality(item);
                                 }
                             }
                         }
                         else
                         {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
+                            item.Quality = item.Quality - item.Quality;
                         }
                     }
                     else
                     {
-                        if (IsQualityLessThan50(Items[i]))
+                        if (IsQualityLessThan50(item))
                         {
-                            IncreaseQuality(Items[i]);
+                            IncreaseQuality(item);
                         }
                     }
+                }
+            }
+        }
+
+        private void HandleBackstagePass(Item item)
+        {
+            if (item.SellIn < 11)
+            {
+                if (IsQualityLessThan50(item))
+                {
+                    IncreaseQuality(item);
+                }
+            }
+
+            if (item.SellIn < 6)
+            {
+                if (IsQualityLessThan50(item))
+                {
+                    IncreaseQuality(item);
                 }
             }
         }
