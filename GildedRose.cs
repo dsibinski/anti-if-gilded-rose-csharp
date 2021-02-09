@@ -20,79 +20,64 @@ namespace csharp
                 }
                 else if (IsGeneric(item))
                 {
-                    HandleGeneric(item);
+                    if (item.Quality > 0)
+                    {
+                        item.Quality = item.Quality - 1;
+                    }
+
+                    item.SellIn = item.SellIn - 1;
+                    if (item.SellIn < 0)
+                    {
+                        if (item.Quality > 0)
+                        {
+                            item.Quality = item.Quality - 1;
+                        }
+                    }
                 }
                 else if(IsAgedBrie(item))
                 {
-                    HandleAgedBrie(item);
+                    if (item.Quality < 50)
+                    {
+                        item.Quality = item.Quality + 1;
+                    }
+
+                    item.SellIn = item.SellIn - 1;
+                    if (item.SellIn < 0)
+                    {
+                        if (item.Quality < 50)
+                        {
+                            item.Quality = item.Quality + 1;
+                        }
+                    }
                 }
                 else if(IsBackstagePass(item))
                 {
-                    HandleBackstagePass(item);
-                }
-            }
-        }
-
-        private void HandleBackstagePass(Item item)
-        {
-            if (IsQualityLessThan50(item))
-            {
-                IncreaseQuality(item);
-
-                if (item.SellIn < 11)
-                {
-                    if (IsQualityLessThan50(item))
+                    if (item.Quality < 50)
                     {
-                        IncreaseQuality(item);
-                    }
-                }
+                        item.Quality = item.Quality + 1;
 
-                if (item.SellIn < 6)
-                {
-                    if (IsQualityLessThan50(item))
+                        if (item.SellIn < 11)
+                        {
+                            if (item.Quality < 50)
+                            {
+                                item.Quality = item.Quality + 1;
+                            }
+                        }
+
+                        if (item.SellIn < 6)
+                        {
+                            if (item.Quality < 50)
+                            {
+                                item.Quality = item.Quality + 1;
+                            }
+                        }
+                    }
+
+                    item.SellIn = item.SellIn - 1;
+                    if (item.SellIn < 0)
                     {
-                        IncreaseQuality(item);
+                        item.Quality = item.Quality - item.Quality;
                     }
-                }
-            }
-
-            item.SellIn = item.SellIn - 1;
-            if (item.SellIn < 0)
-            {
-                item.Quality = item.Quality - item.Quality;
-            }
-        }
-
-        private void HandleAgedBrie(Item item)
-        {
-            if (IsQualityLessThan50(item))
-            {
-                IncreaseQuality(item);
-            }
-
-            item.SellIn = item.SellIn - 1;
-            if (item.SellIn < 0)
-            {
-                if (IsQualityLessThan50(item))
-                {
-                    IncreaseQuality(item);
-                }
-            }
-        }
-
-        private void HandleGeneric(Item item)
-        {
-            if (item.Quality > 0)
-            {
-                DecreaseQuality(item);
-            }
-
-            item.SellIn = item.SellIn - 1;
-            if (item.SellIn < 0)
-            {
-                if (item.Quality > 0)
-                {
-                    DecreaseQuality(item);
                 }
             }
         }
@@ -115,21 +100,6 @@ namespace csharp
         private bool IsAgedBrie(Item item)
         {
             return item.Name == "Aged Brie";
-        }
-
-        private bool IsQualityLessThan50(Item item)
-        {
-            return item.Quality < 50;
-        }
-
-        private void IncreaseQuality(Item item)
-        {
-            item.Quality = item.Quality + 1;
-        }
-
-        private void DecreaseQuality(Item item)
-        {
-            item.Quality = item.Quality - 1;
         }
     }
 }
