@@ -1,9 +1,110 @@
 ﻿using System.Collections.Generic;
+using System.Security.Principal;
 
 namespace csharp
 {
     public class GildedRose
     {
+        public class Generic
+        {
+            public int Quality { get; private set; }
+            public int SellIn { get; private set; }
+            public Generic(int quality, int sellIn)
+            {
+                Quality = quality;
+                SellIn = sellIn;
+            }
+
+            public void Update()
+            {
+                if (Quality > 0)
+                {
+                    Quality = Quality - 1;
+                }
+
+                SellIn = SellIn - 1;
+                if (SellIn < 0)
+                {
+                    if (Quality > 0)
+                    {
+                        Quality = Quality - 1;
+                    }
+                }
+            }
+        }
+        
+        public class AgedBrie
+        {
+            public int Quality { get; private set; }
+            public int SellIn { get; private set; }
+            
+            public AgedBrie(int quality, int sellIn)
+            {
+                Quality = quality;
+                SellIn = sellIn;
+            }
+
+            public void Update()
+            {
+                if (Quality < 50)
+                {
+                    Quality = Quality + 1;
+                }
+
+                SellIn = SellIn - 1;
+                if (SellIn < 0)
+                {
+                    if (Quality < 50)
+                    {
+                        Quality = Quality + 1;
+                    }
+                }
+            }
+        }
+        
+        public class BackstagePass
+        {
+            public int Quality { get; private set; }
+            public int SellIn { get; private set; }
+            
+            public BackstagePass(int quality, int sellIn)
+            {
+                Quality = quality;
+                SellIn = sellIn;
+            }
+            
+
+            public void Update()
+            {
+                if (Quality < 50)
+                {
+                    Quality = Quality + 1;
+
+                    if (SellIn < 11)
+                    {
+                        if (Quality < 50)
+                        {
+                            Quality = Quality + 1;
+                        }
+                    }
+
+                    if (SellIn < 6)
+                    {
+                        if (Quality < 50)
+                        {
+                            Quality = Quality + 1;
+                        }
+                    }
+                }
+
+                SellIn = SellIn - 1;
+                if (SellIn < 0)
+                {
+                    Quality = Quality - Quality;
+                }
+            }
+        }
+        
         IList<Item> Items;
         public GildedRose(IList<Item> Items)
         {
@@ -20,64 +121,24 @@ namespace csharp
                 }
                 else if (IsGeneric(item))
                 {
-                    if (item.Quality > 0)
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
-
-                    item.SellIn = item.SellIn - 1;
-                    if (item.SellIn < 0)
-                    {
-                        if (item.Quality > 0)
-                        {
-                            item.Quality = item.Quality - 1;
-                        }
-                    }
+                    var generic = new Generic(item.Quality, item.SellIn);
+                    generic.Update();
+                    item.Quality = generic.Quality;
+                    item.SellIn = generic.SellIn;
                 }
                 else if(IsAgedBrie(item))
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality = item.Quality + 1;
-                    }
-
-                    item.SellIn = item.SellIn - 1;
-                    if (item.SellIn < 0)
-                    {
-                        if (item.Quality < 50)
-                        {
-                            item.Quality = item.Quality + 1;
-                        }
-                    }
+                    var agedBrie = new AgedBrie(item.Quality, item.SellIn);
+                    agedBrie.Update();
+                    item.Quality = agedBrie.Quality;
+                    item.SellIn = agedBrie.SellIn;
                 }
                 else if(IsBackstagePass(item))
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality = item.Quality + 1;
-
-                        if (item.SellIn < 11)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
-                        }
-
-                        if (item.SellIn < 6)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
-                        }
-                    }
-
-                    item.SellIn = item.SellIn - 1;
-                    if (item.SellIn < 0)
-                    {
-                        item.Quality = item.Quality - item.Quality;
-                    }
+                    var backstagePass = new BackstagePass(item.Quality, item.SellIn);
+                    backstagePass.Update();
+                    item.Quality = backstagePass.Quality;
+                    item.SellIn = backstagePass.SellIn;
                 }
             }
         }
