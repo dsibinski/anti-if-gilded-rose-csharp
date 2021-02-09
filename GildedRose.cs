@@ -5,7 +5,11 @@ namespace csharp
 {
     public class GildedRose
     {
-        public class Generic
+        public interface IGood
+        { 
+            void Update();
+        }
+        public class Generic: IGood
         {
             public int Quality { get; private set; }
             public int SellIn { get; private set; }
@@ -33,7 +37,7 @@ namespace csharp
             }
         }
         
-        public class AgedBrie
+        public class AgedBrie: IGood
         {
             public int Quality { get; private set; }
             public int SellIn { get; private set; }
@@ -62,7 +66,7 @@ namespace csharp
             }
         }
         
-        public class BackstagePass
+        public class BackstagePass: IGood
         {
             public int Quality { get; private set; }
             public int SellIn { get; private set; }
@@ -104,6 +108,20 @@ namespace csharp
                 }
             }
         }
+
+        public class Sulfuras : IGood
+        {
+            public int Quality { get; set; }
+            public int SellIn { get; set; }
+            public Sulfuras(int quality, int sellIn)
+            {
+                Quality = quality;
+                SellIn = sellIn;
+            }
+            public void Update()
+            {
+            }
+        }
         
         IList<Item> Items;
         public GildedRose(IList<Item> Items)
@@ -117,7 +135,10 @@ namespace csharp
             {
                 if (IsSulfuras(item))
                 {
-                    
+                    var sulfuras = new Sulfuras(item.Quality, item.SellIn);
+                    sulfuras.Update();
+                    item.Quality = sulfuras.Quality;
+                    item.SellIn = sulfuras.SellIn;
                 }
                 else if (IsGeneric(item))
                 {
