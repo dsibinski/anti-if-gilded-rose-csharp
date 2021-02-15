@@ -103,6 +103,7 @@
     <Compile Include="Inventory\BackstagePass.cs" />
     <Compile Include="Inventory\Generic.cs" />
     <Compile Include="Inventory\IGood.cs" />
+    <Compile Include="Inventory\Quality.cs" />
     <Compile Include="Inventory\Sulfuras.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Program.cs" />

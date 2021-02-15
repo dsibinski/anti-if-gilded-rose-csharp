@@ -2,43 +2,38 @@ namespace csharp.Inventory
 {
     public class BackstagePass: IGood
     {
-        public int Quality { get; private set; }
+        public int Quality => _quality.Amount;
         public int SellIn { get; private set; }
+        private Quality _quality { get; set; }
             
         public BackstagePass(int quality, int sellIn)
         {
-            Quality = quality;
+            _quality = new Quality(quality);
             SellIn = sellIn;
         }
             
 
         public void Update()
         {
-            if (Quality < 50)
-            {
-                Quality = Quality + 1;
+            _quality.Increase();
 
+            if (_quality.IsLessThan50())
+            {
                 if (SellIn < 11)
                 {
-                    if (Quality < 50)
-                    {
-                        Quality = Quality + 1;
-                    }
+                    _quality.Increase();
                 }
 
                 if (SellIn < 6)
                 {
-                    if (Quality < 50)
-                    {
-                        Quality = Quality + 1;
-                    }
+                    _quality.Increase();
                 }
             }
 
             SellIn = SellIn - 1;
             if (SellIn < 0)
             {
-                Quality = Quality - Quality;
+                _quality.Reset();
             }
         }
     }
