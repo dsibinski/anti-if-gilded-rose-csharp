@@ -11,12 +11,7 @@ namespace csharp
         {
             public IGood BuildFor(Item item)
             {
-                if (IsSulfuras(item))
-                {
-                    return new Sulfuras(item.Quality, item.SellIn);
-                    
-                }
-                else if (IsGeneric(item))
+                if (IsGeneric(item))
                 {
                     return new Generic(item.Quality, item.SellIn);
                 }
@@ -34,12 +29,7 @@ namespace csharp
             
             private bool IsGeneric(Item item)
             {
-                return !(IsSulfuras(item) || IsBackstagePass(item) || IsAgedBrie(item));
-            }
-
-            private bool IsSulfuras(Item item)
-            {
-                return item.Name == "Sulfuras, Hand of Ragnaros";
+                return !(IsBackstagePass(item) || IsAgedBrie(item));
             }
 
             private bool IsBackstagePass(Item item)
@@ -64,11 +54,21 @@ namespace csharp
         {
             foreach (var item in Items)
             {
+                if (IsSulfuras(item))
+                {
+                    continue;
+                }
+                
                 var good = new GoodCategory().BuildFor(item);
                 good.Update();
                 item.Quality = good.Quality;
                 item.SellIn = good.SellIn;
             }
+        }
+        
+        private bool IsSulfuras(Item item)
+        {
+            return item.Name == "Sulfuras, Hand of Ragnaros";
         }
     }
 }
