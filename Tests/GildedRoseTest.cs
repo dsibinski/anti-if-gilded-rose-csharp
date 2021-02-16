@@ -30,12 +30,14 @@ namespace csharp
         public void TestAgedBrie()
         {
             AssertAgedBrieQuality(22, 0, 20);
+            AssertAgedBrieQuality(21, 1, 20);
         }
 
         [Test]
         public void TestCustomProduct()
         {
             AssertCustomProductQuality(1, -1, 3);
+            AssertCustomProductQuality(2, 1, 3);
         }
 
         private void AssertBackstagePassQuality(int expected, int sellIn, int quality)
