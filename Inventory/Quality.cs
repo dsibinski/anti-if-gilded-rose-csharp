@@ -28,10 +28,5 @@ namespace csharp.Inventory
         {
             Amount = 0;
         }
-
-        public bool IsLessThan50()
-        {
-            return Amount < 50;
-        }
     }
 }
