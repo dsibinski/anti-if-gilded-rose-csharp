@@ -40,6 +40,7 @@ namespace csharp
             AssertCustomProductQuality(1, 0, 3);
             AssertCustomProductQuality(2, 1, 3);
             AssertCustomProductQuality(0, 1, 0);
+            AssertCustomProductQuality(0, 1, 1);
         }
 
         private void AssertBackstagePassQuality(int expected, int sellIn, int quality)
