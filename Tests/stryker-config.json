@@ -2,8 +2,8 @@
   "stryker-config":
   {
     "reporters": [
-      "progress",
-      "html"
+      "cleartextTree",
+      "progress"
     ],
     "log-level": "info",
     "log-file":true,
