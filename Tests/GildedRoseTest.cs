@@ -21,6 +21,8 @@ namespace csharp
             AssertBackstagePassQuality(22, 8, 20);
             AssertBackstagePassQuality(23, 4, 20);
             AssertBackstagePassQuality(0, 0, 0);
+            AssertBackstagePassQuality(3, 1, 0);
+            
         }
 
         [Test]

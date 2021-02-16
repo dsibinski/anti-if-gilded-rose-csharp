@@ -1,0 +1,23 @@
+{
+  "stryker-config":
+  {
+    "reporters": [
+      "progress",
+      "html"
+    ],
+    "log-level": "info",
+    "log-file":true,
+    "timeout-ms": 10000,
+    "solution-path": "..\\csharp.sln",
+    "project-file": "csharp.csproj",
+    "ignore-methods": [
+      "*Log*",
+      "ToString",
+      "*Exception.ctor"
+    ],
+    "excluded-mutations": [
+      "string"
+    ],
+    "mutate": "['BackstagePass.cs']"
+  }
+}
