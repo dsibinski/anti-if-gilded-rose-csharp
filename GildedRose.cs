@@ -11,37 +11,16 @@ namespace csharp
         {
             public IGood BuildFor(Item item)
             {
-                if (IsGeneric(item))
+                switch (item.Name)
                 {
-                    return new Generic(item.Quality, item.SellIn);
+                    case "Backstage passes to a TAFKAL80ETC concert":
+                        return new BackstagePass(item.Quality, item.SellIn);
+                    case "Aged Brie":
+                        return new AgedBrie(item.Quality, item.SellIn);
+                    default:
+                        return new Generic(item.Quality, item.SellIn);
                 }
-                else if(IsAgedBrie(item))
-                {
-                    return new AgedBrie(item.Quality, item.SellIn);
-                }
-                else if(IsBackstagePass(item))
-                {
-                    return new BackstagePass(item.Quality, item.SellIn);
-                }
-
-                throw new ArgumentException("Type not supported");
             }
-            
-            private bool IsGeneric(Item item)
-            {
-                return !(IsBackstagePass(item) || IsAgedBrie(item));
-            }
-
-            private bool IsBackstagePass(Item item)
-            {
-                return item.Name == "Backstage passes to a TAFKAL80ETC concert";
-            }
-
-            private bool IsAgedBrie(Item item)
-            {
-                return item.Name == "Aged Brie";
-            }
-            
         }
         
         IList<Item> Items;
