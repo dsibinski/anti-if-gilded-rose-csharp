@@ -16,7 +16,7 @@ namespace csharp
                     case "Backstage passes to a TAFKAL80ETC concert":
                         return new BackstagePass(item.Quality);
                     case "Aged Brie":
-                        return new AgedBrie(item.Quality);
+                        return AgedBrie.Build(item.Quality, item.SellIn);
                     default:
                         return new Generic(item.Quality);
                 }
