@@ -14,7 +14,7 @@ namespace csharp
                 switch (item.Name)
                 {
                     case "Backstage passes to a TAFKAL80ETC concert":
-                        return new BackstagePass();
+                        return BackstagePass.Build(item.SellIn);
                     case "Aged Brie":
                         return AgedBrie.Build(item.SellIn);
                     default:
