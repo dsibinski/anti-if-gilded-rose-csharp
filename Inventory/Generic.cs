@@ -3,20 +3,17 @@ namespace csharp.Inventory
     public class Generic: IGood
     {
         public int Quality => _quality.Amount;
-        public int SellIn { get; private set; }
         private Quality _quality { get; set; }
-        public Generic(int quality, int sellIn)
+        public Generic(int quality)
         {
             _quality = new Quality(quality);
-            SellIn = sellIn;
         }
 
-        public void Update()
+        public void Update(int sellIn)
         {
             _quality.Degrade();
-
-            SellIn = SellIn - 1;
-            if (SellIn < 0)
+            
+            if (sellIn < 0)
             {
                 _quality.Degrade();
             }

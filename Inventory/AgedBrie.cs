@@ -3,22 +3,19 @@ namespace csharp.Inventory
     public class AgedBrie: IGood
     {
         public int Quality => _quality.Amount;
-        public int SellIn { get; private set; }
-        
+
         private Quality _quality { get; set; }
             
-        public AgedBrie(int quality, int sellIn)
+        public AgedBrie(int quality)
         {
             _quality = new Quality(quality);
-            SellIn = sellIn;
         }
 
-        public void Update()
+        public void Update(int sellIn)
         {
             _quality.Increase();
-
-            SellIn = SellIn - 1;
-            if (SellIn < 0)
+            
+            if (sellIn < 0)
             {
                 _quality.Increase();
             }
