@@ -2,45 +2,30 @@ namespace csharp.Inventory
 {
     public class AgedBrie: IGood
     {
-        public static IGood Build(int quality, int sellIn)
+        public static IGood Build(int sellIn)
         {
             if (sellIn < 0)
             {
-                return new Expired(quality);
+                return new Expired();
             }
             else
             {
-                return new AgedBrie(quality);
+                return new AgedBrie();
             }
         }
         
         class Expired : IGood
         {
-            public int Quality => _quality.Amount;
-            private Quality _quality { get; set; }
-            public Expired(int quality)
+            public void Update(Quality quality, int _)
             {
-                _quality = new Quality(quality);
-            }
-            public void Update(int _)
-            {
-                _quality.Increase();
-                _quality.Increase();
+                quality.Increase();
+                quality.Increase();
             }
         }
-        
-        public int Quality => _quality.Amount;
 
-        private Quality _quality { get; set; }
-            
-        public AgedBrie(int quality)
+        public void Update(Quality quality, int _)
         {
-            _quality = new Quality(quality);
-        }
-
-        public void Update(int _)
-        {
-            _quality.Increase();
+            quality.Increase();
         }
     }
 }

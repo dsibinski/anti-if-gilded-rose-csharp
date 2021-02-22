@@ -14,11 +14,11 @@ namespace csharp
                 switch (item.Name)
                 {
                     case "Backstage passes to a TAFKAL80ETC concert":
-                        return new BackstagePass(item.Quality);
+                        return new BackstagePass();
                     case "Aged Brie":
-                        return AgedBrie.Build(item.Quality, item.SellIn);
+                        return AgedBrie.Build(item.SellIn);
                     default:
-                        return new Generic(item.Quality);
+                        return new Generic();
                 }
             }
         }
@@ -39,9 +39,10 @@ namespace csharp
                 }
                 
                 item.SellIn -= 1;
+                var quality = new Quality(item.Quality);
                 var good = new GoodCategory().BuildFor(item);
-                good.Update(item.SellIn);
-                item.Quality = good.Quality;
+                good.Update(quality, item.SellIn);
+                item.Quality = quality.Amount;
             }
         }
         
