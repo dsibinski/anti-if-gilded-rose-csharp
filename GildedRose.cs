@@ -41,7 +41,7 @@ namespace csharp
                 item.SellIn -= 1;
                 var quality = new Quality(item.Quality);
                 var good = new GoodCategory().BuildFor(item);
-                good.Update(quality, item.SellIn);
+                good.Update(quality);
                 item.Quality = quality.Amount;
             }
         }

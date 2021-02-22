@@ -1,3 +1,4 @@
+using System;
 using DiffEngine;
 
 namespace csharp.Inventory
@@ -6,35 +7,48 @@ namespace csharp.Inventory
     {
         public static IGood Build(int sellIn)
         {
-            if (sellIn < 0)
+
+            switch (sellIn)
             {
-                return new Expired();
-            }
-            else
-            {
-                return new BackstagePass();
+                case var _ when sellIn < 0:
+                    return new Expired();
+                case var _ when sellIn < 5:
+                    return new LessThan5Days();
+                case var _ when sellIn < 10:
+                    return new LessThan10Days();
+                default:
+                    return new BackstagePass();
             }
         }
         class Expired : IGood
         {
-            public void Update(Quality quality, int _)
+            public void Update(Quality quality)
             {
                 quality.Reset();
             }
         }
-        public void Update(Quality quality, int sellIn)
+        
+        class LessThan5Days : IGood
+        {
+            public void Update(Quality quality)
+            {
+                quality.Increase();
+                quality.Increase();
+                quality.Increase();
+            }
+        }
+        
+        class LessThan10Days : IGood
+        {
+            public void Update(Quality quality)
+            {
+                quality.Increase();
+                quality.Increase();
+            }
+        }
+        public void Update(Quality quality)
         {
             quality.Increase();
-            
-            if (sellIn < 10)
-            {
-                quality.Increase();
-            }
-
-            if (sellIn < 5)
-            {
-                quality.Increase();
-            }
         }
     }
 }

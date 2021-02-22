@@ -16,14 +16,14 @@ namespace csharp.Inventory
         
         class Expired : IGood
         {
-            public void Update(Quality quality, int _)
+            public void Update(Quality quality)
             {
                 quality.Increase();
                 quality.Increase();
             }
         }
 
-        public void Update(Quality quality, int _)
+        public void Update(Quality quality)
         {
             quality.Increase();
         }
