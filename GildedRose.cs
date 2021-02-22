@@ -18,7 +18,7 @@ namespace csharp
                     case "Aged Brie":
                         return AgedBrie.Build(item.SellIn);
                     default:
-                        return new Generic();
+                        return Generic.Build(item.SellIn);
                 }
             }
         }
