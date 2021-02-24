@@ -59,7 +59,7 @@ namespace csharp
             var reportLines = outputSb.ToString();
 
             Assert.AreEqual(
-                "-------- day 0 --------\r\nname, sellIn, quality\r\n+5 Dexterity Vest, 10, 20\r\nAged Brie, 2, 0\r\nElixir of the Mongoose, 5, 7\r\nSulfuras, Hand of Ragnaros, 0, 80\r\nSulfuras, Hand of Ragnaros, -1, 80\r\nBackstage passes to a TAFKAL80ETC concert, 15, 20\r\nBackstage passes to a TAFKAL80ETC concert, 10, 49\r\nBackstage passes to a TAFKAL80ETC concert, 5, 49\r\nConjured Mana Cake, 3, 6\r\n\r\n-------- day 1 --------\r\nname, sellIn, quality\r\n+5 Dexterity Vest, 9, 19\r\nAged Brie, 1, 1\r\nElixir of the Mongoose, 4, 6\r\nSulfuras, Hand of Ragnaros, 0, 80\r\nSulfuras, Hand of Ragnaros, -1, 80\r\nBackstage passes to a TAFKAL80ETC concert, 14, 21\r\nBackstage passes to a TAFKAL80ETC concert, 9, 50\r\nBackstage passes to a TAFKAL80ETC concert, 4, 50\r\nConjured Mana Cake, 2, 5\r\n\r\n", reportLines);
+                "-------- day 0 --------\r\nname, sellIn, quality\r\n+5 Dexterity Vest, 10, 20\r\nAged Brie, 2, 0\r\nElixir of the Mongoose, 5, 7\r\nSulfuras, Hand of Ragnaros, 0, 80\r\nSulfuras, Hand of Ragnaros, -1, 80\r\nBackstage passes to a TAFKAL80ETC concert, 15, 20\r\nBackstage passes to a TAFKAL80ETC concert, 10, 49\r\nBackstage passes to a TAFKAL80ETC concert, 5, 49\r\nConjured Mana Cake, 3, 6\r\n\r\n-------- day 1 --------\r\nname, sellIn, quality\r\n+5 Dexterity Vest, 9, 19\r\nAged Brie, 1, 1\r\nElixir of the Mongoose, 4, 6\r\nSulfuras, Hand of Ragnaros, 0, 80\r\nSulfuras, Hand of Ragnaros, -1, 80\r\nBackstage passes to a TAFKAL80ETC concert, 14, 21\r\nBackstage passes to a TAFKAL80ETC concert, 9, 50\r\nBackstage passes to a TAFKAL80ETC concert, 4, 50\r\nConjured Mana Cake, 2, 4\r\n\r\n", reportLines);
         }
     }
 }

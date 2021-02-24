@@ -42,6 +42,14 @@ namespace csharp
             AssertCustomProductQuality(0, 1, 0);
             AssertCustomProductQuality(0, 1, 1);
         }
+        
+        [Test]
+        public void TestConjuredProduct()
+        {
+            AssertConjuredProductQuality(4, 3, 6);
+            AssertConjuredProductQuality(2, 0, 6);
+            AssertConjuredProductQuality(4, 1, 6);
+        }
 
         private void AssertBackstagePassQuality(int expected, int sellIn, int quality)
         {
@@ -74,6 +82,19 @@ namespace csharp
             IList<Item> Items = new List<Item> { new Item
             {
                 Name = "Custom Product", 
+                SellIn = sellIn, 
+                Quality = quality
+            } };
+            GildedRose app = new GildedRose(Items);
+            app.UpdateQuality();
+            Assert.AreEqual(expected, Items[0].Quality);
+        }
+        
+        private void AssertConjuredProductQuality(int expected, int sellIn, int quality)
+        {
+            IList<Item> Items = new List<Item> { new Item
+            {
+                Name = "Conjured Mana Cake", 
                 SellIn = sellIn, 
                 Quality = quality
             } };

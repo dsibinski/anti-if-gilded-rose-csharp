@@ -101,6 +101,7 @@
     <Compile Include="GildedRose.cs" />
     <Compile Include="Inventory\AgedBrie.cs" />
     <Compile Include="Inventory\BackstagePass.cs" />
+    <Compile Include="Inventory\Conjured.cs" />
     <Compile Include="Inventory\Generic.cs" />
     <Compile Include="Inventory\IGood.cs" />
     <Compile Include="Inventory\Quality.cs" />

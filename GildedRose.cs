@@ -17,6 +17,8 @@ namespace csharp
                         return BackstagePass.Build(item.SellIn);
                     case "Aged Brie":
                         return AgedBrie.Build(item.SellIn);
+                    case "Conjured Mana Cake":
+                        return Conjured.Build(item.SellIn);
                     default:
                         return Generic.Build(item.SellIn);
                 }
